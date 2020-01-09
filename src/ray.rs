@@ -305,6 +305,7 @@ impl Ray {
 }
 
 #[cfg(test)]
+#[allow(unused_doc_comments)]
 mod tests {
     use std::cmp;
     use std::f32::INFINITY;

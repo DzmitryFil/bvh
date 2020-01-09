@@ -648,6 +648,7 @@ impl Bounded for Point3<f32> {
 }
 
 #[cfg(test)]
+#[allow(unused_doc_comments)]
 mod tests {
     use crate::aabb::{Bounded, AABB};
     use crate::testbase::{tuple_to_point, tuple_to_vector, TupleVec};
