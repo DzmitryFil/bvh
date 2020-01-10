@@ -13,11 +13,9 @@ use rand::rngs::StdRng;
 use rand::seq::SliceRandom;
 use rand::SeedableRng;
 
-use crate::aabb::{Bounded, AABB};
+use math::aabb::{Bounded, AABB};
 use crate::bounding_hierarchy::{BHShape, BoundingHierarchy};
-use crate::ray::Ray;
-
-pub type TupleVec = (f32, f32, f32);
+use math::ray::Ray;
 
 /// Define some `Bounded` structure.
 pub struct UnitBox {

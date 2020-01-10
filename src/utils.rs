@@ -1,6 +1,6 @@
 //! Utilities module.
 
-use crate::aabb::AABB;
+use math::aabb::AABB;
 use crate::bounding_hierarchy::BHShape;
 
 /// Concatenates the list of vectors into a single vector.

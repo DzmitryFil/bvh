@@ -1,7 +1,7 @@
 //! This module defines the `BoundingHierarchy` trait.
 
-use crate::aabb::Bounded;
-use crate::ray::Ray;
+use math::aabb::Bounded;
+use math::ray::Ray;
 
 /// Describes a shape as referenced by a [`BoundingHierarchy`] leaf node.
 /// Knows the index of the node in the [`BoundingHierarchy`] it is in.
@@ -30,7 +30,7 @@ pub trait BoundingHierarchy {
     /// # Examples
     ///
     /// ```
-    /// use bvh::aabb::{AABB, Bounded};
+    /// use math::aabb::{AABB, Bounded};
     /// use bvh::bounding_hierarchy::BoundingHierarchy;
     /// use math::vector3::Vector3;
     /// # use bvh::bounding_hierarchy::BHShape;
@@ -101,11 +101,11 @@ pub trait BoundingHierarchy {
     /// # Examples
     ///
     /// ```
-    /// use bvh::aabb::{AABB, Bounded};
+    /// use math::aabb::{AABB, Bounded};
     /// use bvh::bounding_hierarchy::BoundingHierarchy;
     /// use bvh::bvh::BVH;
     /// use math::vector3::Vector3;
-    /// use bvh::ray::Ray;
+    /// use math::ray::Ray;
     /// # use bvh::bounding_hierarchy::BHShape;
     /// # pub struct UnitBox {
     /// #     pub id: i32,

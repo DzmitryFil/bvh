@@ -4,9 +4,9 @@
 //! [`BVHNode`]: struct.BVHNode.html
 //!
 
-use crate::aabb::{Bounded, AABB};
+use math::aabb::{Bounded, AABB};
 use crate::bounding_hierarchy::{BHShape, BoundingHierarchy};
-use crate::ray::Ray;
+use math::ray::Ray;
 use crate::utils::{concatenate_vectors, joint_aabb_of_shapes, Bucket};
 use crate::EPSILON;
 use math::vector3::Vector3;

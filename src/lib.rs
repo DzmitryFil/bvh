@@ -14,11 +14,11 @@
 //! ## Example
 //!
 //! ```
-//! use bvh::aabb::{AABB, Bounded};
+//! use math::aabb::{AABB, Bounded};
 //! use bvh::bounding_hierarchy::{BoundingHierarchy, BHShape};
 //! use bvh::bvh::BVH;
 //! use math::vector3::Vector3;
-//! use bvh::ray::Ray;
+//! use math::ray::Ray;
 //!
 //! let origin = Vector3::new(0.0,0.0,0.0);
 //! let direction = Vector3::new(1.0,0.0,0.0);
@@ -75,12 +75,9 @@ extern crate test;
 /// TODO: replace by/add ULPS/relative float comparison methods.
 pub const EPSILON: f32 = 0.00001;
 
-pub mod aabb;
-pub mod axis;
 pub mod bounding_hierarchy;
 pub mod bvh;
 pub mod flat_bvh;
-pub mod ray;
 mod utils;
 
 #[cfg(test)]

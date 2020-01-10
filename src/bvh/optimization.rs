@@ -6,7 +6,7 @@
 //! [`BVH`]: struct.BVH.html
 //!
 
-use crate::aabb::AABB;
+use math::aabb::AABB;
 use crate::bounding_hierarchy::BHShape;
 use crate::bvh::*;
 
@@ -513,7 +513,7 @@ impl BVH {
 
 #[cfg(test)]
 mod tests {
-    use crate::aabb::Bounded;
+    use math::aabb::Bounded;
     use crate::bounding_hierarchy::BHShape;
     use crate::bvh::{BVHNode, BVH};
     use crate::testbase::{
@@ -936,7 +936,7 @@ mod tests {
 
 #[cfg(all(feature = "bench", test))]
 mod bench {
-    use crate::aabb::AABB;
+    use math::aabb::AABB;
     use crate::bvh::BVH;
     use crate::testbase::{
         create_n_cubes, default_bounds, intersect_bh, load_sponza_scene, randomly_transform_scene,

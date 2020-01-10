@@ -1,9 +1,9 @@
 //! This module exports methods to flatten the `BVH` and traverse it iteratively.
 
-use crate::aabb::{Bounded, AABB};
+use math::aabb::{Bounded, AABB};
 use crate::bounding_hierarchy::{BHShape, BoundingHierarchy};
 use crate::bvh::{BVHNode, BVH};
-use crate::ray::Ray;
+use math::ray::Ray;
 
 /// A structure of a node of a flat [`BVH`]. The structure of the nodes allows for an
 /// iterative traversal approach without the necessity to maintain a stack or queue.
@@ -157,10 +157,10 @@ impl BVH {
     /// # Example
     ///
     /// ```
-    /// use bvh::aabb::{AABB, Bounded};
+    /// use math::aabb::{AABB, Bounded};
     /// use bvh::bvh::BVH;
     /// use math::vector3::Vector3;
-    /// use bvh::ray::Ray;
+    /// use math::ray::Ray;
     /// # use bvh::bounding_hierarchy::BHShape;
     /// # pub struct UnitBox {
     /// #     pub id: i32,
@@ -241,10 +241,10 @@ impl BVH {
     /// # Example
     ///
     /// ```
-    /// use bvh::aabb::{AABB, Bounded};
+    /// use math::aabb::{AABB, Bounded};
     /// use bvh::bvh::BVH;
     /// use math::vector3::Vector3;
-    /// use bvh::ray::Ray;
+    /// use math::ray::Ray;
     /// # use bvh::bounding_hierarchy::BHShape;
     /// # pub struct UnitBox {
     /// #     pub id: i32,
@@ -321,11 +321,11 @@ impl BoundingHierarchy for FlatBVH {
     /// # Examples
     ///
     /// ```
-    /// use bvh::aabb::{AABB, Bounded};
+    /// use math::aabb::{AABB, Bounded};
     /// use bvh::bounding_hierarchy::BoundingHierarchy;
     /// use bvh::flat_bvh::FlatBVH;
     /// use math::vector3::Vector3;
-    /// use bvh::ray::Ray;
+    /// use math::ray::Ray;
     /// # use bvh::bounding_hierarchy::BHShape;
     /// # pub struct UnitBox {
     /// #     pub id: i32,

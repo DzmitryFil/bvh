@@ -23,10 +23,10 @@ iterative traversal of the BVH.
 ## Example
 
 ```rust
-use bvh::aabb::{AABB, Bounded};
+use math::aabb::{AABB, Bounded};
 use bvh::bvh::BVH;
 use math::{Vector3};
-use bvh::ray::Ray;
+use math::ray::Ray;
 
 let origin = Point3::new(0.0,0.0,0.0);
 let direction = Vector3::new(1.0,0.0,0.0);
