@@ -9,7 +9,7 @@ use crate::bounding_hierarchy::{BHShape, BoundingHierarchy};
 use crate::ray::Ray;
 use crate::utils::{concatenate_vectors, joint_aabb_of_shapes, Bucket};
 use crate::EPSILON;
-use nalgebra::Point3;
+use math::vector3::Vector3;
 use std::f32;
 use std::iter::repeat;
 
@@ -453,9 +453,9 @@ impl BVH {
                     ..
                 } => {
                     let padding: String = repeat(" ").take(depth as usize).collect();
-                    println!("{}child_l {}", padding, child_l_aabb);
+                    println!("{:?}child_l {:?}", padding, child_l_aabb);
                     print_node(nodes, child_l_index);
-                    println!("{}child_r {}", padding, child_r_aabb);
+                    println!("{:?}child_r {:?}", padding, child_r_aabb);
                     print_node(nodes, child_r_index);
                 }
                 BVHNode::Leaf {
@@ -542,8 +542,8 @@ impl BVH {
     pub fn is_consistent<Shape: BHShape>(&self, shapes: &[Shape]) -> bool {
         // The root node of the bvh is not bounded by anything.
         let space = AABB {
-            min: Point3::new(f32::NEG_INFINITY, f32::NEG_INFINITY, f32::NEG_INFINITY),
-            max: Point3::new(f32::INFINITY, f32::INFINITY, f32::INFINITY),
+            min: Vector3::new(f32::NEG_INFINITY, f32::NEG_INFINITY, f32::NEG_INFINITY),
+            max: Vector3::new(f32::INFINITY, f32::INFINITY, f32::INFINITY),
         };
 
         // The counter for all nodes.
@@ -594,16 +594,16 @@ impl BVH {
                 assert!(
                     expected_outer_aabb.approx_contains_aabb_eps(&child_l_aabb, EPSILON),
                     "Left child lies outside the expected bounds.
-                         \tBounds: {}
-                         \tLeft child: {}",
+                         \tBounds: {:?}
+                         \tLeft child: {:?}",
                     expected_outer_aabb,
                     child_l_aabb
                 );
                 assert!(
                     expected_outer_aabb.approx_contains_aabb_eps(&child_r_aabb, EPSILON),
                     "Right child lies outside the expected bounds.
-                         \tBounds: {}
-                         \tRight child: {}",
+                         \tBounds: {:?}
+                         \tRight child: {:?}",
                     expected_outer_aabb,
                     child_r_aabb
                 );
@@ -628,7 +628,7 @@ impl BVH {
                 let shape_aabb = shapes[shape_index].aabb();
                 assert!(
                     expected_outer_aabb.approx_contains_aabb_eps(&shape_aabb, EPSILON),
-                    "Shape's AABB lies outside the expected bounds.\n\tBounds: {}\n\tShape: {}",
+                    "Shape's AABB lies outside the expected bounds.\n\tBounds: {:?}\n\tShape: {:?}",
                     expected_outer_aabb,
                     shape_aabb
                 );
@@ -640,8 +640,8 @@ impl BVH {
     pub fn assert_consistent<Shape: BHShape>(&self, shapes: &[Shape]) {
         // The root node of the bvh is not bounded by anything.
         let space = AABB {
-            min: Point3::new(f32::NEG_INFINITY, f32::NEG_INFINITY, f32::NEG_INFINITY),
-            max: Point3::new(f32::INFINITY, f32::INFINITY, f32::INFINITY),
+            min: Vector3::new(f32::NEG_INFINITY, f32::NEG_INFINITY, f32::NEG_INFINITY),
+            max: Vector3::new(f32::INFINITY, f32::INFINITY, f32::INFINITY),
         };
 
         // The counter for all nodes.

@@ -1,0 +1,75 @@
+
+running 70 tests
+test aabb::tests::test_aabb_contains_center ... ignored
+test aabb::tests::test_create_aabb_from_indexable ... ignored
+test aabb::tests::test_default_is_empty ... ignored
+test aabb::tests::test_empty_contains_nothing ... ignored
+test aabb::tests::test_join_two_aabbs ... ignored
+test aabb::tests::test_points_relative_to_center_and_size ... ignored
+test aabb::tests::test_surface_always_positive ... ignored
+test aabb::tests::test_surface_area_cube ... ignored
+test aabb::tests::test_volume_always_positive ... ignored
+test aabb::tests::test_volume_by_hand ... ignored
+test axis::test::test_index_by_axis ... ignored
+test axis::test::test_set_by_axis ... ignored
+test bvh::bvh::tests::test_build_bvh ... ignored
+test bvh::bvh::tests::test_bvh_shape_indices ... ignored
+test bvh::bvh::tests::test_traverse_bvh ... ignored
+test bvh::optimization::tests::test_connect_child_grandchild ... ignored
+test bvh::optimization::tests::test_connect_grandchildren ... ignored
+test bvh::optimization::tests::test_consistent_after_optimize ... ignored
+test bvh::optimization::tests::test_optimize_bvh_12k_75p ... ignored
+test bvh::optimization::tests::test_optimize_simple_update ... ignored
+test bvh::optimization::tests::test_optimizing_new_bvh ... ignored
+test bvh::optimization::tests::test_rotate_child_grandchild ... ignored
+test bvh::optimization::tests::test_rotate_grandchildren ... ignored
+test bvh::optimization::tests::test_try_rotate_child_grandchild ... ignored
+test flat_bvh::tests::test_build_flat_bvh ... ignored
+test flat_bvh::tests::test_traverse_flat_bvh ... ignored
+test ray::tests::test_ray_hits_triangle ... ignored
+test ray::tests::test_ray_points_at_aabb_center ... ignored
+test ray::tests::test_ray_points_at_aabb_center_branchless ... ignored
+test ray::tests::test_ray_points_at_aabb_center_naive ... ignored
+test ray::tests::test_ray_points_from_aabb_center ... ignored
+test ray::tests::test_ray_points_from_aabb_center_branchless ... ignored
+test ray::tests::test_ray_points_from_aabb_center_naive ... ignored
+test utils::tests::test_concatenate_empty ... ignored
+test utils::tests::test_concatenate_vectors ... ignored
+test bvh::optimization::bench::bench_intersect_120k_after_optimize_00p   ... bench:         885 ns/iter (+/- 13)
+test bvh::optimization::bench::bench_intersect_120k_after_optimize_01p   ... bench:     142,623 ns/iter (+/- 9,636)
+test bvh::optimization::bench::bench_intersect_120k_after_optimize_10p   ... bench:   1,208,343 ns/iter (+/- 274,809)
+test bvh::optimization::bench::bench_intersect_120k_after_optimize_50p   ... bench:   2,000,092 ns/iter (+/- 894,626)
+test bvh::optimization::bench::bench_intersect_120k_with_rebuild_00p     ... bench:         889 ns/iter (+/- 15)
+test bvh::optimization::bench::bench_intersect_120k_with_rebuild_01p     ... bench:         944 ns/iter (+/- 20)
+test bvh::optimization::bench::bench_intersect_120k_with_rebuild_10p     ... bench:       1,794 ns/iter (+/- 153)
+test bvh::optimization::bench::bench_intersect_120k_with_rebuild_50p     ... bench:       2,119 ns/iter (+/- 259)
+test bvh::optimization::bench::bench_intersect_sponza_after_optimize_00p ... bench:       1,756 ns/iter (+/- 50)
+test bvh::optimization::bench::bench_intersect_sponza_after_optimize_01p ... bench:       3,129 ns/iter (+/- 127)
+test bvh::optimization::bench::bench_intersect_sponza_after_optimize_10p ... bench:       4,175 ns/iter (+/- 233)
+test bvh::optimization::bench::bench_intersect_sponza_after_optimize_50p ... bench:       6,174 ns/iter (+/- 386)
+test bvh::optimization::bench::bench_intersect_sponza_with_rebuild_00p   ... bench:       1,747 ns/iter (+/- 33)
+test bvh::optimization::bench::bench_intersect_sponza_with_rebuild_01p   ... bench:       1,862 ns/iter (+/- 44)
+test bvh::optimization::bench::bench_intersect_sponza_with_rebuild_10p   ... bench:       2,225 ns/iter (+/- 55)
+test bvh::optimization::bench::bench_intersect_sponza_with_rebuild_50p   ... bench:       2,750 ns/iter (+/- 95)
+test bvh::optimization::bench::bench_optimize_bvh_120k_00p               ... bench:   1,237,730 ns/iter (+/- 8,919)
+test bvh::optimization::bench::bench_optimize_bvh_120k_01p               ... bench:   7,706,095 ns/iter (+/- 1,574,095)
+test bvh::optimization::bench::bench_optimize_bvh_120k_10p               ... bench:  51,015,560 ns/iter (+/- 14,918,924)
+test bvh::optimization::bench::bench_optimize_bvh_120k_50p               ... bench: 278,173,630 ns/iter (+/- 80,675,126)
+test bvh::optimization::bench::bench_randomize_120k_50p                  ... bench:   4,548,270 ns/iter (+/- 1,507,025)
+test flat_bvh::bench::bench_build_1200_triangles_flat_bvh                ... bench:   1,629,480 ns/iter (+/- 97,586)
+test flat_bvh::bench::bench_build_120k_triangles_flat_bvh                ... bench: 222,298,290 ns/iter (+/- 3,193,115)
+test flat_bvh::bench::bench_build_12k_triangles_flat_bvh                 ... bench:  19,385,440 ns/iter (+/- 540,765)
+test flat_bvh::bench::bench_flatten_120k_triangles_bvh                   ... bench:  10,798,310 ns/iter (+/- 157,400)
+test flat_bvh::bench::bench_intersect_1200_triangles_flat_bvh            ... bench:         168 ns/iter (+/- 2)
+test flat_bvh::bench::bench_intersect_120k_triangles_flat_bvh            ... bench:         907 ns/iter (+/- 13)
+test flat_bvh::bench::bench_intersect_12k_triangles_flat_bvh             ... bench:         389 ns/iter (+/- 6)
+test ray::bench::bench_intersects_aabb                                   ... bench:      43,145 ns/iter (+/- 1,303)
+test ray::bench::bench_intersects_aabb_branchless                        ... bench:      43,110 ns/iter (+/- 306)
+test ray::bench::bench_intersects_aabb_naive                             ... bench:      43,128 ns/iter (+/- 253)
+test testbase::bench_intersect_120k_triangles_list                       ... bench:     845,285 ns/iter (+/- 32,093)
+test testbase::bench_intersect_120k_triangles_list_aabb                  ... bench:     289,050 ns/iter (+/- 9,853)
+test testbase::bench_intersect_sponza_list                               ... bench:     655,922 ns/iter (+/- 10,057)
+test testbase::bench_intersect_sponza_list_aabb                          ... bench:     145,955 ns/iter (+/- 1,960)
+
+test result: ok. 0 passed; 0 failed; 35 ignored; 35 measured; 0 filtered out
+
