@@ -5,8 +5,8 @@ use std::collections::HashSet;
 use std::f32;
 use std::mem::transmute;
 
-use num::{FromPrimitive, Integer};
 use math::vector3::Vector3;
+use num::{FromPrimitive, Integer};
 use obj::raw::object::Polygon;
 use obj::*;
 use rand::rngs::StdRng;
@@ -17,18 +17,7 @@ use crate::aabb::{Bounded, AABB};
 use crate::bounding_hierarchy::{BHShape, BoundingHierarchy};
 use crate::ray::Ray;
 
-/// A vector represented as a tuple
 pub type TupleVec = (f32, f32, f32);
-
-/// Convert a `TupleVec` to a `nalgebra` point.
-pub fn tuple_to_point(tpl: &TupleVec) -> Vector3<f32> {
-    Vector3::new(tpl.0, tpl.1, tpl.2)
-}
-
-/// Convert a `TupleVec` to a `nalgebra` vector.
-pub fn tuple_to_vector(tpl: &TupleVec) -> Vector3<f32> {
-    Vector3::new(tpl.0, tpl.1, tpl.2)
-}
 
 /// Define some `Bounded` structure.
 pub struct UnitBox {
@@ -306,7 +295,7 @@ fn splitmix64(x: &mut u64) -> u64 {
 }
 
 /// Generates a new `i32` triple. Mutates the seed.
-pub fn next_Vector3_raw(seed: &mut u64) -> (i32, i32, i32) {
+pub fn next_vector3_raw(seed: &mut u64) -> (i32, i32, i32) {
     let u = splitmix64(seed);
     let a = ((u >> 32) & 0xFFFFFFFF) as i64 - 0x80000000;
     let b = (u & 0xFFFFFFFF) as i64 - 0x80000000;
@@ -315,8 +304,8 @@ pub fn next_Vector3_raw(seed: &mut u64) -> (i32, i32, i32) {
 }
 
 /// Generates a new `Vector3`, which will lie inside the given `aabb`. Mutates the seed.
-pub fn next_Vector3(seed: &mut u64, aabb: &AABB) -> Vector3<f32> {
-    let (a, b, c) = next_Vector3_raw(seed);
+pub fn next_vector3(seed: &mut u64, aabb: &AABB) -> Vector3<f32> {
+    let (a, b, c) = next_vector3_raw(seed);
     use std::i32;
     let float_vector = Vector3::new(
         (a as f32 / i32::MAX as f32) + 1.0,
@@ -350,7 +339,7 @@ pub fn create_n_cubes(n: usize, bounds: &AABB) -> Vec<Triangle> {
     let mut vec = Vec::new();
     let mut seed = 0;
     for _ in 0..n {
-        push_cube(next_Vector3(&mut seed, bounds), &mut vec);
+        push_cube(next_vector3(&mut seed, bounds), &mut vec);
     }
     vec
 }
@@ -407,7 +396,7 @@ pub fn randomly_transform_scene(
         let max_move_bound = bounds.max - aabb.max;
         let movement_bounds = AABB::with_bounds(min_move_bound, max_move_bound);
 
-        let mut random_offset = next_Vector3(seed, &movement_bounds);
+        let mut random_offset = next_vector3(seed, &movement_bounds);
         random_offset.x = max_offset.min((-max_offset).max(random_offset.x));
         random_offset.y = max_offset.min((-max_offset).max(random_offset.y));
         random_offset.z = max_offset.min((-max_offset).max(random_offset.z));
@@ -430,8 +419,8 @@ pub fn randomly_transform_scene(
 /// `bounds`.
 #[cfg(feature = "bench")]
 pub fn create_ray(seed: &mut u64, bounds: &AABB) -> Ray {
-    let origin = next_Vector3(seed, bounds);
-    let direction = next_Vector3(seed, bounds);
+    let origin = next_vector3(seed, bounds);
+    let direction = next_vector3(seed, bounds);
     Ray::new(origin, direction)
 }
 

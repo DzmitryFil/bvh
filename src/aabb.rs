@@ -2,7 +2,6 @@
 
 use std::f32;
 use std::ops::Index;
-use std::fmt;
 
 use approx::relative_eq;
 use math::vector3::Vector3;
@@ -119,10 +118,6 @@ impl AABB {
     /// assert!(aabb.contains(&point_inside));
     /// assert!(!aabb.contains(&point_outside));
     /// ```
-    ///
-    /// [`AABB`]: struct.AABB.html
-    /// [`Vector3`]: http://nalgebra.org/doc/nalgebra/struct.Vector3.html
-    ///
     pub fn contains(&self, p: &Vector3<f32>) -> bool {
         p.x >= self.min.x
             && p.x <= self.max.x
@@ -148,9 +143,6 @@ impl AABB {
     /// assert!(aabb.approx_contains_eps(&point_barely_outside, EPSILON));
     /// assert!(!aabb.approx_contains_eps(&point_outside, EPSILON));
     /// ```
-    ///
-    /// [`AABB`]: struct.AABB.html
-    /// [`Vector3`]: http://nalgebra.org/doc/nalgebra/struct.Vector3.html
     ///
     pub fn approx_contains_eps(&self, p: &Vector3<f32>, epsilon: f32) -> bool {
         (p.x - self.min.x) > -epsilon
@@ -323,10 +315,6 @@ impl AABB {
     /// assert!(aabb2.contains(&point2));
     /// assert!(!aabb2.contains(&Vector3));
     /// ```
-    ///
-    /// [`AABB`]: struct.AABB.html
-    /// [`Vector3`]: http://nalgebra.org/doc/nalgebra/struct.Vector3.html
-    ///
     pub fn grow(&self, other: &Vector3<f32>) -> AABB {
         AABB::with_bounds(
             Vector3::new(
@@ -364,10 +352,6 @@ impl AABB {
     /// assert!(aabb.contains(&point2));
     /// assert!(!aabb.contains(&Vector3));
     /// ```
-    ///
-    /// [`AABB::grow`]: struct.AABB.html
-    /// [`Vector3`]: http://nalgebra.org/doc/nalgebra/struct.Vector3.html
-    ///
     pub fn grow_mut(&mut self, other: &Vector3<f32>) {
         self.min = Vector3::new(
             self.min.x.min(other.x),
@@ -446,10 +430,6 @@ impl AABB {
     /// let center = aabb.center();
     /// assert!(center.x == 42.0 && center.y == 42.0 && center.z == 42.0);
     /// ```
-    ///
-    /// [`AABB`]: struct.AABB.html
-    /// [`Vector3`]: http://nalgebra.org/doc/nalgebra/struct.Vector3.html
-    ///
     pub fn center(&self) -> Vector3<f32> {
         self.min + (self.size() / 2.0)
     }
@@ -631,10 +611,6 @@ impl Bounded for AABB {
 /// let aabb = point.aabb();
 /// assert!(aabb.contains(&point));
 /// ```
-///
-/// [`Bounded`]: trait.Bounded.html
-/// [`Vector3`]: http://nalgebra.org/doc/nalgebra/struct.Vector3.html
-///
 impl Bounded for Vector3<f32> {
     fn aabb(&self) -> AABB {
         AABB::with_bounds(*self, *self)
@@ -645,8 +621,8 @@ impl Bounded for Vector3<f32> {
 #[allow(unused_doc_comments)]
 mod tests {
     use crate::aabb::{Bounded, AABB};
-    use crate::testbase::{tuple_to_point, tuple_to_vector, TupleVec};
     use crate::EPSILON;
+    use crate::testbase::TupleVec;
 
     use math::vector3::Vector3;
     use quickcheck::quickcheck;
@@ -655,7 +631,7 @@ mod tests {
     quickcheck! {
         fn test_empty_contains_nothing(tpl: TupleVec) -> bool {
             // Define a random Point
-            let p = tuple_to_point(&tpl);
+            let p = Vector3::from(tpl);
 
             // Create an empty AABB
             let aabb = AABB::empty();
@@ -669,7 +645,7 @@ mod tests {
     quickcheck! {
         fn test_default_is_empty(tpl: TupleVec) -> bool {
             // Define a random Point
-            let p = tuple_to_point(&tpl);
+            let p = Vector3::from(tpl);
 
             // Create a default AABB
             let aabb: AABB = Default::default();
@@ -683,8 +659,8 @@ mod tests {
     quickcheck! {
         fn test_aabb_contains_center(a: TupleVec, b: TupleVec) -> bool {
             // Define two points which will be the corners of the `AABB`
-            let p1 = tuple_to_point(&a);
-            let p2 = tuple_to_point(&b);
+            let p1 = Vector3::from(a);
+            let p2 = Vector3::from(b);
 
             // Span the `AABB`
             let aabb = AABB::empty().grow(&p1).join_bounded(&p2);
@@ -703,7 +679,7 @@ mod tests {
             let points = [a.0, a.1, a.2, a.3, a.4, b.0, b.1, b.2, b.3, b.4];
 
             // Convert these points to `Vector3`
-            let points = points.iter().map(tuple_to_point).collect::<Vec<Vector3<f32>>>();
+            let points = points.iter().cloned().map(Vector3::from).collect::<Vec<Vector3<f32>>>();
 
             // Create two `AABB`s. One spanned the first five points,
             // the other by the last five points
@@ -735,8 +711,8 @@ mod tests {
         fn test_points_relative_to_center_and_size(a: TupleVec, b: TupleVec) -> bool {
             // Generate some nonempty AABB
             let aabb = AABB::empty()
-                .grow(&tuple_to_point(&a))
-                .grow(&tuple_to_point(&b));
+                .grow(&Vector3::from(a))
+                .grow(&Vector3::from(b));
 
             // Get its size and center
             let size = aabb.size();
@@ -764,8 +740,8 @@ mod tests {
     quickcheck! {
         fn test_surface_always_positive(a: TupleVec, b: TupleVec) -> bool {
             let aabb = AABB::empty()
-                .grow(&tuple_to_point(&a))
-                .grow(&tuple_to_point(&b));
+                .grow(&Vector3::from(a))
+                .grow(&Vector3::from(b));
             aabb.surface_area() >= 0.0
         }
     }
@@ -774,7 +750,7 @@ mod tests {
     quickcheck! {
         fn test_surface_area_cube(pos: TupleVec, size: f32) -> bool {
             // Generate some non-empty AABB
-            let pos = tuple_to_point(&pos);
+            let pos = Vector3::from(pos);
             let size_vec = Vector3::new(size, size, size);
             let aabb = AABB::with_bounds(pos, pos + size_vec);
 
@@ -789,8 +765,8 @@ mod tests {
     quickcheck! {
         fn test_volume_always_positive(a: TupleVec, b: TupleVec) -> bool {
             let aabb = AABB::empty()
-                .grow(&tuple_to_point(&a))
-                .grow(&tuple_to_point(&b));
+                .grow(&Vector3::from(a))
+                .grow(&Vector3::from(b));
             aabb.volume() >= 0.0
         }
     }
@@ -799,8 +775,8 @@ mod tests {
     quickcheck! {
         fn test_volume_by_hand(pos: TupleVec, size: TupleVec) -> bool {
             // Generate some non-empty AABB
-            let pos = tuple_to_point(&pos);
-            let size = tuple_to_vector(&size);
+            let pos = Vector3::from(pos);
+            let size = Vector3::from(size);
             let aabb = pos.aabb().grow(&(pos + size));
 
             // Check its volume
@@ -814,12 +790,12 @@ mod tests {
     quickcheck! {
         fn test_create_aabb_from_indexable(a: TupleVec, b: TupleVec, p: TupleVec) -> bool {
             // Create a random point
-            let point = tuple_to_point(&p);
+            let point = Vector3::from(p);
 
             // Create a random AABB
             let aabb = AABB::empty()
-                .grow(&tuple_to_point(&a))
-                .grow(&tuple_to_point(&b));
+                .grow(&Vector3::from(a))
+                .grow(&Vector3::from(b));
 
             // Create an AABB by using the index-access method
             let aabb_by_index = AABB::with_bounds(aabb[0], aabb[1]);

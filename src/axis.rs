@@ -103,7 +103,6 @@ impl IndexMut<Axis> for Vector3<f32> {
     }
 }
 
-
 #[cfg(test)]
 mod test {
     use crate::axis::Axis;

@@ -312,8 +312,9 @@ mod tests {
 
     use crate::aabb::AABB;
     use crate::ray::Ray;
-    use crate::testbase::{tuple_to_point, TupleVec};
+    use crate::testbase::{TupleVec};
     use crate::EPSILON;
+    use math::vector3::Vector3;
 
     use quickcheck::quickcheck;
 
@@ -321,14 +322,14 @@ mod tests {
     fn gen_ray_to_aabb(data: (TupleVec, TupleVec, TupleVec)) -> (Ray, AABB) {
         // Generate a random AABB
         let aabb = AABB::empty()
-            .grow(&tuple_to_point(&data.0))
-            .grow(&tuple_to_point(&data.1));
+            .grow(&Vector3::from(data.0))
+            .grow(&Vector3::from(data.1));
 
         // Get its center
         let center = aabb.center();
 
         // Generate random ray pointing at the center
-        let pos = tuple_to_point(&data.2);
+        let pos = Vector3::from(data.2);
         let ray = Ray::new(pos, center - pos);
         (ray, aabb)
     }
@@ -413,7 +414,7 @@ mod tests {
                                   v: u16)
                                   -> bool {
             // Define a triangle, u/v vectors and its normal
-            let triangle = (tuple_to_point(&a), tuple_to_point(&b), tuple_to_point(&c));
+            let triangle = (Vector3::from(a), Vector3::from(b), Vector3::from(c));
             let u_vec = triangle.1 - triangle.0;
             let v_vec = triangle.2 - triangle.0;
             let normal = u_vec.cross(v_vec);
@@ -428,7 +429,7 @@ mod tests {
             let point_on_triangle = triangle.0 + u_vec * u + v_vec * v;
 
             // Define a ray which points at the triangle
-            let origin = tuple_to_point(&origin);
+            let origin = Vector3::from(origin);
             let ray = Ray::new(origin, point_on_triangle - origin);
             let on_back_side = normal.dot(ray.origin - triangle.0) <= 0.0;
 
@@ -474,15 +475,16 @@ mod bench {
 
     use crate::aabb::AABB;
     use crate::ray::Ray;
+    use math::vector3::Vector3;
 
-    use crate::testbase::{tuple_to_point, tuple_to_vector, TupleVec};
+    use crate::testbase::{TupleVec};
 
     /// Generates some random deterministic `Ray`/`AABB` pairs.
     fn gen_random_ray_aabb(rng: &mut StdRng) -> (Ray, AABB) {
-        let a = tuple_to_point(&rng.gen::<TupleVec>());
-        let b = tuple_to_point(&rng.gen::<TupleVec>());
-        let c = tuple_to_point(&rng.gen::<TupleVec>());
-        let d = tuple_to_vector(&rng.gen::<TupleVec>());
+        let a = Vector3::from(rng.gen::<TupleVec>());
+        let b = Vector3::from(rng.gen::<TupleVec>());
+        let c = Vector3::from(rng.gen::<TupleVec>());
+        let d = Vector3::from(rng.gen::<TupleVec>());
 
         let aabb = AABB::empty().grow(&a).grow(&b);
         let ray = Ray::new(c, d);
