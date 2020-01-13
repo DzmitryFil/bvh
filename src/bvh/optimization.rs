@@ -6,9 +6,9 @@
 //! [`BVH`]: struct.BVH.html
 //!
 
-use math::aabb::AABB;
 use crate::bounding_hierarchy::BHShape;
 use crate::bvh::*;
+use math::collision::AABB;
 
 use log::info;
 use rand::{thread_rng, Rng};
@@ -513,14 +513,14 @@ impl BVH {
 
 #[cfg(test)]
 mod tests {
-    use math::aabb::Bounded;
     use crate::bounding_hierarchy::BHShape;
     use crate::bvh::{BVHNode, BVH};
     use crate::testbase::{
         build_some_bh, create_n_cubes, default_bounds, randomly_transform_scene, UnitBox,
     };
     use crate::EPSILON;
-    use math::vector3::Vector3;
+    use math::collision::Bounded;
+    use math::vector::Vector3;
     use std::collections::HashSet;
 
     #[test]
@@ -936,12 +936,12 @@ mod tests {
 
 #[cfg(all(feature = "bench", test))]
 mod bench {
-    use math::aabb::AABB;
     use crate::bvh::BVH;
     use crate::testbase::{
         create_n_cubes, default_bounds, intersect_bh, load_sponza_scene, randomly_transform_scene,
         Triangle,
     };
+    use math::collision::AABB;
 
     #[bench]
     /// Benchmark randomizing 50% of the shapes in a `BVH`.

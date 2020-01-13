@@ -1,7 +1,7 @@
 //! Utilities module.
 
-use math::aabb::AABB;
 use crate::bounding_hierarchy::BHShape;
+use math::collision::AABB;
 
 /// Concatenates the list of vectors into a single vector.
 /// Drains the elements from the source `vectors`.

@@ -4,12 +4,11 @@
 //! [`BVHNode`]: struct.BVHNode.html
 //!
 
-use math::aabb::{Bounded, AABB};
 use crate::bounding_hierarchy::{BHShape, BoundingHierarchy};
-use math::ray::Ray;
 use crate::utils::{concatenate_vectors, joint_aabb_of_shapes, Bucket};
 use crate::EPSILON;
-use math::vector3::Vector3;
+use math::collision::{Bounded, Ray, AABB};
+use math::vector::Vector3;
 use std::f32;
 use std::iter::repeat;
 

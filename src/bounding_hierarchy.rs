@@ -1,7 +1,7 @@
 //! This module defines the `BoundingHierarchy` trait.
 
-use math::aabb::Bounded;
-use math::ray::Ray;
+use math::collision::Bounded;
+use math::collision::Ray;
 
 /// Describes a shape as referenced by a [`BoundingHierarchy`] leaf node.
 /// Knows the index of the node in the [`BoundingHierarchy`] it is in.
@@ -30,9 +30,9 @@ pub trait BoundingHierarchy {
     /// # Examples
     ///
     /// ```
-    /// use math::aabb::{AABB, Bounded};
+    /// use math::collision::{AABB, Bounded};
     /// use bvh::bounding_hierarchy::BoundingHierarchy;
-    /// use math::vector3::Vector3;
+    /// use math::vector::Vector3;
     /// # use bvh::bounding_hierarchy::BHShape;
     /// # pub struct UnitBox {
     /// #     pub id: i32,
@@ -101,11 +101,11 @@ pub trait BoundingHierarchy {
     /// # Examples
     ///
     /// ```
-    /// use math::aabb::{AABB, Bounded};
+    /// use math::collision::{AABB, Bounded};
     /// use bvh::bounding_hierarchy::BoundingHierarchy;
     /// use bvh::bvh::BVH;
-    /// use math::vector3::Vector3;
-    /// use math::ray::Ray;
+    /// use math::vector::Vector3;
+    /// use math::collision::Ray;
     /// # use bvh::bounding_hierarchy::BHShape;
     /// # pub struct UnitBox {
     /// #     pub id: i32,

@@ -5,7 +5,7 @@ use std::collections::HashSet;
 use std::f32;
 use std::mem::transmute;
 
-use math::vector3::Vector3;
+use math::vector::Vector3;
 use num::{FromPrimitive, Integer};
 use obj::raw::object::Polygon;
 use obj::*;
@@ -13,9 +13,8 @@ use rand::rngs::StdRng;
 use rand::seq::SliceRandom;
 use rand::SeedableRng;
 
-use math::aabb::{Bounded, AABB};
 use crate::bounding_hierarchy::{BHShape, BoundingHierarchy};
-use math::ray::Ray;
+use math::collision::{Bounded, Ray, AABB};
 
 /// Define some `Bounded` structure.
 pub struct UnitBox {

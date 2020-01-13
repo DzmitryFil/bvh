@@ -14,11 +14,10 @@
 //! ## Example
 //!
 //! ```
-//! use math::aabb::{AABB, Bounded};
+//! use math::collision::{AABB, Bounded, Ray};
 //! use bvh::bounding_hierarchy::{BoundingHierarchy, BHShape};
 //! use bvh::bvh::BVH;
-//! use math::vector3::Vector3;
-//! use math::ray::Ray;
+//! use math::vector::Vector3;
 //!
 //! let origin = Vector3::new(0.0,0.0,0.0);
 //! let direction = Vector3::new(1.0,0.0,0.0);
