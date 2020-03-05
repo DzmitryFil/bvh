@@ -26,8 +26,8 @@ pub struct UnitBox {
 impl UnitBox {
     pub fn new(id: i32, pos: Vector3<f32>) -> UnitBox {
         UnitBox {
-            id: id,
-            pos: pos,
+            id,
+            pos,
             node_index: 0,
         }
     }
@@ -143,9 +143,9 @@ pub struct Triangle {
 impl Triangle {
     pub fn new(a: Vector3<f32>, b: Vector3<f32>, c: Vector3<f32>) -> Triangle {
         Triangle {
-            a: a,
-            b: b,
-            c: c,
+            a,
+            b,
+            c,
             aabb: AABB::empty().grow(&a).grow(&b).grow(&c),
             node_index: 0,
         }
@@ -284,18 +284,18 @@ fn push_cube(pos: Vector3<f32>, shapes: &mut Vec<Triangle>) {
 /// Implementation of splitmix64.
 /// For reference see: http://xoroshiro.di.unimi.it/splitmix64.c
 fn splitmix64(x: &mut u64) -> u64 {
-    *x = x.wrapping_add(0x9E3779B97F4A7C15u64);
+    *x = x.wrapping_add(0x9E37_79B9_7F4A_7C15u64);
     let mut z = *x;
-    z = (z ^ (z >> 30)).wrapping_mul(0xBF58476D1CE4E5B9u64);
-    z = (z ^ (z >> 27)).wrapping_mul(0x94D049BB133111EBu64);
+    z = (z ^ (z >> 30)).wrapping_mul(0xBF58_476D_1CE4_E5B9u64);
+    z = (z ^ (z >> 27)).wrapping_mul(0x94D0_49BB_1331_11EBu64);
     z ^ (z >> 31)
 }
 
 /// Generates a new `i32` triple. Mutates the seed.
 pub fn next_vector3_raw(seed: &mut u64) -> (i32, i32, i32) {
     let u = splitmix64(seed);
-    let a = ((u >> 32) & 0xFFFFFFFF) as i64 - 0x80000000;
-    let b = (u & 0xFFFFFFFF) as i64 - 0x80000000;
+    let a = ((u >> 32) & 0xFFFF_FFFF) as i64 - 0x8000_0000;
+    let b = (u & 0xFFFF_FFFF) as i64 - 0x8000_0000;
     let c = a ^ b.rotate_left(6);
     (a as i32, b as i32, c as i32)
 }
