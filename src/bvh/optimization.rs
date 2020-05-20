@@ -564,7 +564,7 @@ mod tests {
         shapes.push(UnitBox::new(2, Vector3::new(50.0, 0.0, 0.0)));
 
         let mut bvh = BVH::build(&mut shapes);
-        bvh.pretty_print();
+        // bvh.pretty_print();
 
         // Assert that SAH joined shapes #0 and #1.
         {
@@ -595,7 +595,7 @@ mod tests {
         shapes[1].pos = Vector3::new(40.0, 0.0, 0.0);
         let refit_shape_indices: HashSet<usize> = (1..2).collect();
         bvh.optimize(&refit_shape_indices, &shapes);
-        bvh.pretty_print();
+        // bvh.pretty_print();
         bvh.assert_consistent(&shapes);
 
         // Assert that now SAH joined shapes #1 and #2.
