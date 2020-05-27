@@ -1,7 +1,6 @@
 //! This module defines the `BoundingHierarchy` trait.
 
-use math::collision::Bounded;
-use math::collision::Ray;
+use math::collision::{Bounded, Ray};
 
 /// Describes a shape as referenced by a [`BoundingHierarchy`] leaf node.
 /// Knows the index of the node in the [`BoundingHierarchy`] it is in.
